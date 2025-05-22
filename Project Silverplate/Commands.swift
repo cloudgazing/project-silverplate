@@ -5,7 +5,7 @@ struct AppCommands: Commands {
 
 	var body: some Commands {
 		CommandGroup(replacing: .appInfo) {
-			Button("About Skyline") {
+			Button("About App") {
 				openWindow(id: "about")
 			}
 		}
