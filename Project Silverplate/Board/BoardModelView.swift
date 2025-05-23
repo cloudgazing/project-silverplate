@@ -19,6 +19,7 @@ struct BoardModelView: NSViewRepresentable {
 
 		mtkView.framebufferOnly = false
 		mtkView.drawableSize = mtkView.frame.size
+		mtkView.layer?.isOpaque = false
 
 		return mtkView
 	}

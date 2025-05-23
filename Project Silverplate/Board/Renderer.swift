@@ -1,11 +1,11 @@
 import MetalKit
 
 final class Renderer: NSObject, MTKViewDelegate {
-	var parent: BoardModelView
+	let parent: BoardModelView
 
-	var device: any MTLDevice
-	var commandQueue: any MTLCommandQueue
-	var pipeline: any MTLRenderPipelineState
+	let device: any MTLDevice
+	let commandQueue: any MTLCommandQueue
+	let pipeline: any MTLRenderPipelineState
 
 	init(_ parent: BoardModelView) {
 		self.parent = parent
@@ -37,7 +37,7 @@ final class Renderer: NSObject, MTKViewDelegate {
 		let commandBuffer = self.commandQueue.makeCommandBuffer()!
 
 		let renderPassDescriptor = view.currentRenderPassDescriptor!
-		renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(0.0, 0.0, 0.0, 0.0)
+		renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(0, 0, 0, 0)
 		renderPassDescriptor.colorAttachments[0].loadAction = .clear
 		renderPassDescriptor.colorAttachments[0].storeAction = .store
 
@@ -55,10 +55,11 @@ final class Renderer: NSObject, MTKViewDelegate {
 
 
 func pipelineBuilder(_ device: some MTLDevice) -> some MTLRenderPipelineState {
+	guard let library = device.makeDefaultLibrary() else {
+		fatalError("Could not create metal library!")
+	}
+
 	let pipelineDescriptor = MTLRenderPipelineDescriptor()
-
-	let library = device.makeDefaultLibrary()!
-
 	pipelineDescriptor.vertexFunction = library.makeFunction(name: "vertex_main")
 	pipelineDescriptor.fragmentFunction = library.makeFunction(name: "fragment_main")
 	pipelineDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm

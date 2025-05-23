@@ -4,5 +4,4 @@
 #include <simd/simd.h>
 
 
-
 #endif /* definitions_h */
