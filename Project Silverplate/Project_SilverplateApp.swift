@@ -2,10 +2,19 @@ import SwiftUI
 
 @main
 struct SilverplateApp: App {
+
+	init() {
+		NSWindow.allowsAutomaticWindowTabbing = false
+	}
+
 	var body: some Scene {
 		WindowGroup {
 			ContentView()
 		}
+		.windowToolbarStyle(.unified(showsTitle: false))
+		.windowStyle(.hiddenTitleBar)
+		.windowToolbarLabelStyle(fixed: .iconOnly)
+		.commandsRemoved()
 		.commands { AppCommands() }
 
 		Window("About App", id: "about") {
@@ -22,3 +31,4 @@ struct SilverplateApp: App {
 		.windowResizability(.automatic)
 	}
 }
+

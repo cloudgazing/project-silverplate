@@ -1,9 +1,11 @@
 import SwiftUI
 
 struct KeyView: View {
+	private let keyType: KeyType
 	private let name: String
 
-	init(_ name: String) {
+	init(_ name: String, _ keyType: KeyType) {
+		self.keyType = keyType
 		self.name = name
 	}
 
@@ -14,4 +16,12 @@ struct KeyView: View {
 			.background(Color.gray)
 			.cornerRadius(10)
 	}
+}
+
+enum KeyType {
+	case basic
+	case media
+	case system
+	case layer
+	case macro
 }

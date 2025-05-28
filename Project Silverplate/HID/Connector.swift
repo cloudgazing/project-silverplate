@@ -10,6 +10,8 @@ let deviceMatch: [String: UInt16] = [
 final class HIDConnector {
 	private let manager: IOHIDManager
 
+	private(set) var connectedDevices: [ConnectedDevice] = [ConnectedDevice("MoonQuartz", .keyboard), ConnectedDevice("Obsidian", .controller)]
+
 	init() {
 		let manager = IOHIDManagerCreate(kCFAllocatorDefault, IOOptionBits(kIOHIDOptionsTypeNone))
 
